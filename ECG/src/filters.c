@@ -34,10 +34,47 @@ int squaringFilter( int x[], int n)
 	return res;
 }
 
-int mwiFilter(int y[], int x[], int n)
+int mwiFilter( int x[], int n)
 {
 	int N =30;
 	res=1/N * (x[n-(N-1)] + x[n-(N-2)+ x[n]]);
 	return res;
 }
 
+
+
+/*
+ * int xSize, ySize;
+ * int lowPassFilter(int* y[], int x[], int n)
+{
+
+	res = 2*y[((n-1) % ySize)] - y[((n-2) % ySize)] + 1/32 *(x[n % xSize] - 2*x[(n-6) % xSize]+ x[(n-12 )%xSize]);
+	return res;
+}
+int highPassFilter(int y[], int x[], int n)
+{
+	 res = y[(n-1) % ySize ] - x[n % xSize]/32 + x[(n-16) %xSize] - x[(n-17)%xSize]+ (x[n % xSize]-32)/32;
+	 return res;
+
+}
+
+
+int derivativeFilter(int x[], int n)
+{
+	res = 1/8*(2*x[n % xSize]+ x[(n-1) % xSize]-x[(n-3) % xSize]-2*x[(n-4)%xSize]);
+	return res;
+}
+
+int squaringFilter( int x[], int n)
+{
+	res = x[n % xSize ]*x[n % xSize ];
+	return res;
+}
+
+int mwiFilter( int x[], int n)
+{
+	int N =30;
+	res=1/N * (x[n-(N-1)] + x[n-(N-2)+ x[n]]);
+	return res;
+}
+ */
