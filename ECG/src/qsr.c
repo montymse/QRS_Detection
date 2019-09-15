@@ -15,7 +15,7 @@ int RR_AVERAGE1 ;  	//AVREAGE of the 8 most recent RR intervals (during the sear
 RR_AVERAGE2;  	//AVREAGE of the 8 most recent RR intervals between RR high and low(not found in the search back)
 int RR_LOW = INT_MIN;		  	//Define as 92% of RR_AVERAGE2
 int RR_HIGH = INT_MAX;	  	//Define as 116% of RR_AVERAGE2
-RR_MISS; 	 	//Define as 166% of RR_AVERAGE2 (use during the search back)
+RR_MISS; 	 	//Define as 166% of RR_AVERAGE2 (used during the search back)
 
 int searchPeak(int x[], int n){
 	int nPKF = 0.125 * x[n] + 0.875 * nPKF ;
