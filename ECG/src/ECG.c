@@ -17,6 +17,9 @@ int main(void) {
 	puts("!!!Hello Clair!!!");
 	FILE * file = openfile("ECG.txt");
 	getNextData(file);
+	for (int i = 0 ; i < 10; i ++){
+		printf("%d", lowPassFilter(x,y,i));
+	}
 	return EXIT_SUCCESS;
 }
 
