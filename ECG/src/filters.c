@@ -2,10 +2,11 @@
 
 // Feel free to change return statement and arguments
 int res;
-int max_low = 5;
+int max_low = 33;
 int max_x= 13;
-int max_high =33;
-int max_der =2;
+int max_high =5;
+int max_der =1;
+int N =30;
 
 
 int lowPassFilter(int y[], int x[], int n)
@@ -36,7 +37,6 @@ int squaringFilter( int x[], int n)
 
 int mwiFilter( int x[], int n)
 {
-	int N =30;
 	res=1/N * (x[n-(N-1)] + x[n-(N-2)+ x[n]]);
 	return res;
 }
