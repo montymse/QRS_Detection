@@ -13,6 +13,7 @@ int PEAKS[],Rpeak[];
 int THRESHOLD1,THRESHOLD2, NPKF, SPKF;
 int RR, RR_LOW,RR_HIGH, RR_MISS,RR_AVERAGE1, RR_AVERAGE2;
 
+/*
 //Constants for QSR. saadman*
 #define RR_AVG_GAP 8 //Size of the R interval gap
 #define PULSE_AVG_GAP 5 //Size of the pulse interval gap
@@ -22,6 +23,7 @@ int RR, RR_LOW,RR_HIGH, RR_MISS,RR_AVERAGE1, RR_AVERAGE2;
 #define AVGHEARTRATE SAMPLING_FREQUENCY/9*6
 #define MAX_HEARTRATE 50 // The highest possible heart rate (The lowest difference in n between two heart beats)
 #define MAX_PEAKS 15 //Maximum number of peaks to be stored, needs to store enough peaks, so that we can find peaks in the searchback call (unsure what the minimum is for this number) (For the provided input file, the minimum number is 10)
+*/
 
 
 void peakDetection()

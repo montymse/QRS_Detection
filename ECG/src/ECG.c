@@ -19,7 +19,7 @@ int main(void) {
 	FILE * file = openfile("ECG.txt");
 	getNextData(file);
 	for (int i = 0 ; i < 10; i ++){
-		printf("%d", lowPassFilter(x,res,i));
+		printf("%d", lowPassFilter()); //hvilke argumenter??
 	}
 	return EXIT_SUCCESS;
 }

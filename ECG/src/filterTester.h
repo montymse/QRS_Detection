@@ -1,0 +1,11 @@
+#ifndef FILTERTESTER_H
+#define FILTERTESTER_H
+
+void testLowPassFilter();
+void testHighPassFilter();
+void testDerivativeFilter();
+void testSquaringFilter();
+void testMwiFilter();
+void testAllFiltersChainedTogether();
+
+#endif // FILTERTESTER_H

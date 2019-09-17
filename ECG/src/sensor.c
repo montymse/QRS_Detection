@@ -4,16 +4,16 @@
 
 int getNextData(FILE *file)
 {
-	int line;
+	int line = 0;
 
-	if (file != NULL ){
-		fscanf(file,"%d",&line);
-		printf("Data: %d", line);
+	if (!feof(file)){
+		int success = fscanf(file,"%d",&line);
+		//printf("Data: %d", line);
 	}
 	else{
 		fclose(file);
 	}
-	return 0;
+	return line;
 }
 
 FILE* openfile(const char* filename)
