@@ -12,13 +12,14 @@
 #include <stdlib.h>
 #include "sensor.h"
 #include "filters.h"
+#include "qrs.h"
 
 int main(void) {
-	puts("!!!Hello Clair!!!");
+	puts("Personal ECG scanner!");
 	FILE * file = openfile("ECG.txt");
 	getNextData(file);
 	for (int i = 0 ; i < 10; i ++){
-		printf("%d", lowPassFilter(x,y,i));
+		printf("%d", lowPassFilter(x,res,i));
 	}
 	return EXIT_SUCCESS;
 }

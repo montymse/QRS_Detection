@@ -11,7 +11,7 @@ int peaks_max;
 int PEAKS[],Rpeak[];
 int THRESHOLD1,THRESHOLD2, NPKF, SPKF;
 int RR, RR_LOW,RR_HIGH, RR_MISS;
-void peakDetection(QRS_params *paramsm, int n)
+void peakDetection()
 {
 	int x[n % x_size];
 	//All peaks that are found, are stored in a list named PEAKS
