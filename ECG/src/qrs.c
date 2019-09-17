@@ -11,6 +11,9 @@ int peaks_max;
 int PEAKS[],Rpeak[];
 int THRESHOLD1,THRESHOLD2, NPKF, SPKF;
 int RR, RR_LOW,RR_HIGH, RR_MISS;
+
+
+
 void peakDetection()
 {
 	int x[n % x_size];
@@ -23,7 +26,8 @@ void peakDetection()
 			 NPKF = 0.125 * peak + 0.875 * NPKF ;
 			 THRESHOLD1 = NPKF  + 0.25*(SPKF- NPKF);
 			 THRESHOLD2 = 0.5* THRESHOLD1;
-		 }else{
+		 }
+		 else{
 			calculateRR();
 			//RR??
 
@@ -50,7 +54,8 @@ void peakDetection()
 				 THRESHOLD1 = NPKF  + 0.25*(SPKF- NPKF);
 				 THRESHOLD2 = 0.5* THRESHOLD1;
 
-			}else {
+			}
+			else{
 				//5.3 Searchback
 				if(RR > RR_MISS){
 					SPKF = 0.25 * peak[n] + 0.75* SPKF;
@@ -58,9 +63,9 @@ void peakDetection()
 					if (peak  < THRESHOLD2){
 						if(RR > RR_MISS){
 							SPKF = 0.25 * peak[n] + 0.75* SPKF;
-
 						}
-				}else{
+					}
+					else{
 					//Store peak as Rpeak
 					peak = getPeak();
 					storeRpeak(peak);
@@ -76,13 +81,11 @@ void peakDetection()
 					RR_MISS  = 1.66  * RR_AVERAGE1;
 					THRESHOLD1 = NPKF  + 0.25*(SPKF- NPKF);
 					THRESHOLD2 = 0.5* THRESHOLD1;
+					}
 				}
-
-
+			}
 		 }
 	}
-
-
 }
 
 
