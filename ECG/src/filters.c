@@ -3,8 +3,8 @@
 // Feel free to change return statement and arguments
 int res;
 int max_low = 5;
-int max_x= 20;
-int max_high =30;
+int max_x= 13;
+int max_high =33;
 int max_der =2;
 
 
