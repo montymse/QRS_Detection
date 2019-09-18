@@ -13,19 +13,23 @@
 #include "sensor.h"
 #include "filters.h"
 #include "filterTester.h"
+#include "qrs.h"
+#include "qrsTester.h"
 
 int main(void) {
-	//puts("!!!Hello Clair!!!");
-	// FILE * file = openfile("ECG.txt");
-	// getNextData(file);
+	//storeArrayTest();
+	//searchPeakTest();
 
+	findAvgTest();
+
+	/*
 	testLowPassFilter();
 	testHighPassFilter();
 	testDerivativeFilter();
 	testSquaringFilter();
 	testMwiFilter();
 	testAllFiltersChainedTogether();
-
+	*/
 	return EXIT_SUCCESS;
 }
 

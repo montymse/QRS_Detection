@@ -7,7 +7,7 @@ int getNextData(FILE *file)
 	int line = 0;
 
 	if (!feof(file)){
-		int success = fscanf(file,"%d",&line);
+		fscanf(file,"%d",&line);
 		//printf("Data: %d", line);
 	}
 	else{

@@ -19,13 +19,10 @@ typedef struct QRS_params
 // Feel free to change and add methods
 void peakDetection();
 int searchPeak(int x[], int n);
-int getPeak(void);
-void storePeak(int peak);
 int calculateRR();
-int RR_AVERAGE1();
-int RR_AVERAGE2();
-void storeRpeak(int peak);
-
+int storeArray(int el, int arr[], int position);
+int findAvg(int arr[]);
+void searchBackwards(int i);
 
 
 #endif // QSR_H
