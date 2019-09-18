@@ -1,3 +1,4 @@
+
 #include "qrs.h"
 #include "filters.h"
 #include <stdio.h>
@@ -11,7 +12,7 @@ int x[];
 int peaks_max;
 int PEAKS[],Rpeak[];
 int THRESHOLD1,THRESHOLD2, NPKF, SPKF;
-int RR, RR_LOW,RR_HIGH, RR_MISS,RR_AVERAGE1, RR_AVERAGE2;
+int RR, RR_LOW,RR_HIGH, RR_MISS;
 
 
 
@@ -114,7 +115,7 @@ int calculateRR(){
 	return R;
 }
 
-/*
+
 int RR_AVERAGE1(){
 
 	int RR_AVG1;
@@ -125,13 +126,10 @@ int RR_AVERAGE2(){
 	int RR_AVG2;
 	return RR_AVG2;
 }
-*/
+
 void storeRpeak(int peak){
 	Rpeak[n % peaks_max] = peak;
 }
-
-
-
 
 
 
