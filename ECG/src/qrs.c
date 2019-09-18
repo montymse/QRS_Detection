@@ -8,6 +8,7 @@
 int x_size;
 int peak;
 int n;
+
 int x[32];
 
 int Index[100];
@@ -15,6 +16,7 @@ int position=0;
 
 int PEAKS[100];
 int Rpeak[100];
+
 int THRESHOLD1 = 0;
 int THRESHOLD2 =0;
 int NPKF =0;
@@ -34,10 +36,10 @@ void reset() {
 	if (n<=32) {
 		n=0;
 		for (int i=0;i<=32;i++) {
-			x[i]=//new value
 		}
 	}
 }
+
 
 void peakDetection()
 {
@@ -45,6 +47,7 @@ void peakDetection()
 	int search = searchPeak(x,n);
 	if(search == 0){
 		 peak = searchPeak(x,n);
+
 		 storeArray(peak, PEAKS, position);
 		 storeArray(n,Index, position);
 
@@ -67,10 +70,12 @@ void peakDetection()
 				 SPKF = 0.125 * peak + 0.875 * SPKF ;
 
 				//Store RR in RecentRR_OK
+
 				storeArray(RR,RecentRR_OK, position);
 
 				//Store RR in RecentRR
 				storeArray(RR,RecentRR, position);
+
 
 				 //RR_AVG1 = avg of RecentRR
 				 RR_AVG1 = findAvg(RecentRR);
@@ -103,14 +108,14 @@ void peakDetection()
 int searchPeak(int x[], int n){
 	if (n<1) {
 
-
-	if ((x[n-1] < x[n]) &&  (x[n] > x[n+1])){
-		return x[n];
-	}
+		if ((x[n-1] < x[n]) &&  (x[n] > x[n+1])){
+			return x[n];
+		} break;
 	} else {
 		 return x[n] > x[n+1];
 	}
 	return 0;
+
 }
 
 //5.2 Finding R-peaks
@@ -122,8 +127,6 @@ int calculateRR(int n){
 
 int storeArray(int el, int arr[], int position){
 	arr[position]=el;
-	return 0;
-}
 
 
 int findAvg(int arr[]){
@@ -168,7 +171,6 @@ void searchBackwards(int i){
 		return;
 	}
 }
-
 
 
 
