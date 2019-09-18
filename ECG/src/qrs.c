@@ -13,17 +13,6 @@ int PEAKS[],Rpeak[];
 int THRESHOLD1,THRESHOLD2, NPKF, SPKF;
 int RR, RR_LOW,RR_HIGH, RR_MISS,RR_AVERAGE1, RR_AVERAGE2;
 
-/*
-//Constants for QSR. saadman*
-#define RR_AVG_GAP 8 //Size of the R interval gap
-#define PULSE_AVG_GAP 5 //Size of the pulse interval gap
-#define MAX_RR_PEAKS RR_AVG_GAP + 3 //Need to be exactly this size to work (RR_AVG_GAP + 3 )
-#define SAMPLING_FREQUENCY 250
-#define MIN_HEARTRATE 600 // The slowest possible hear rate (The highest difference in n between two heart beats)
-#define AVGHEARTRATE SAMPLING_FREQUENCY/9*6
-#define MAX_HEARTRATE 50 // The highest possible heart rate (The lowest difference in n between two heart beats)
-#define MAX_PEAKS 15 //Maximum number of peaks to be stored, needs to store enough peaks, so that we can find peaks in the searchback call (unsure what the minimum is for this number) (For the provided input file, the minimum number is 10)
-*/
 
 
 void peakDetection()
@@ -33,6 +22,7 @@ void peakDetection()
 	if(searchPeak(x)){
 		 peak = getPeak();
 		 storePeak(peak);
+
 		 //The algorithm then checks if they exceed THRESHOLD1. If they do, they are classified as an R-peak.
 		 if (peak < THRESHOLD1){
 			 NPKF = 0.125 * peak + 0.875 * NPKF ;
