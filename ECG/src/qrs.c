@@ -156,16 +156,3 @@ void searchBackwards(int i){
 
 
 
-
-/*int searchPeak(int x[], int n){
-	if (x[n-1 % x_size] < x[n % x_size] > x[n+1 %x_size]){
-		return 1;
-	}
-	return 0;
-}*/
-
-/*int getPeak(void){
-	return x[n -1 % x_size];
-}
-*/
-
