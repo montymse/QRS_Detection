@@ -16,7 +16,7 @@ int THRESHOLD2 =0;
 int NPKF =0;
 int SPKF = 0;
 
-int RPEAKS[];
+int RPEAKS[100];
 int RR,RR_MISS;
 int RR_LOW =0;
 int RR_HIGH =0;
@@ -49,7 +49,7 @@ void peakDetection()
 			NPKF = 0.125 * peak + 0.875 * NPKF ;
 
 
-			if(RR_LOW < RR  && RR < RR_HIGH){
+			if((RR_LOW < RR)  && (RR < RR_HIGH)){
 				//Store peak as Rpeak
 			    //storeArray(peak, RPEAKS);
 
@@ -90,7 +90,7 @@ void peakDetection()
 
 
 int searchPeak(int x[], int n){
-	if (x[n-1] < x[n] > x[n+1]){
+	if ((x[n-1] < x[n]) &&  (x[n] > x[n+1])){
 		return x[n];
 	}
 	return 0;
@@ -105,16 +105,17 @@ int calculateRR(){
 }
 
 
-void storeArray(int el, int arr[]){
+int storeArray(int el, int arr[]){
 	arr[n]=el;
+	return 0;
 }
 
 
-int findAvg(arr[]){
+int findAvg(int *arr[]){
 	int sum =0;
 	for(int i =0; i <= 8 ;i++){
 		if(arr[i] != NULL){
-			sum += arr[i];
+			sum += *arr[i];
 		}
 	}
 	return sum / 8;
