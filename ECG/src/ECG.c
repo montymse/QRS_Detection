@@ -12,15 +12,20 @@
 #include <stdlib.h>
 #include "sensor.h"
 #include "filters.h"
-#include "qrs.h"
+#include "filterTester.h"
 
 int main(void) {
-	puts("Personal ECG scanner!");
-	FILE * file = openfile("ECG.txt");
-	getNextData(file);
-	for (int i = 0 ; i < 10; i ++){
-		printf("%d", lowPassFilter()); //hvilke argumenter??
-	}
+	//puts("!!!Hello Clair!!!");
+	// FILE * file = openfile("ECG.txt");
+	// getNextData(file);
+
+	testLowPassFilter();
+	testHighPassFilter();
+	testDerivativeFilter();
+	testSquaringFilter();
+	testMwiFilter();
+	testAllFiltersChainedTogether();
+
 	return EXIT_SUCCESS;
 }
 
