@@ -5,6 +5,6 @@
 void storeArrayTest();
 void searchPeakTest();
 void findAvgTest();
-
-
+void peakDetectionTest();
+void calculateRRTest();
 #endif //

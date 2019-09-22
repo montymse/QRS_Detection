@@ -13,17 +13,26 @@
 #include "sensor.h"
 #include "filters.h"
 #include "filterTester.h"
-<<<<<<< HEAD
 #include "qrs.h"
 #include "qrsTester.h"
+#include "output.h"
 
 int main(void) {
 	//storeArrayTest();
 	//searchPeakTest();
-
-	findAvgTest();
-
+	//warningTest();
+	//findAvgTest();
+	//peakDetectionTest();
+	//calculateRRTest();
+	testLowPassFilter();
+	testHighPassFilter();
+	testDerivativeFilter();
+	testSquaringFilter();
+	testMwiFilter();
+	testAllFiltersChainedTogether();
 	/*
+	 *
+	 *
 
 int main(void) {
 	puts("!!!Hello Clair!!!");
