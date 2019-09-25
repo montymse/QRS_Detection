@@ -19,13 +19,12 @@
 #include "qrsTester.h"
 #include "output.h"
 #include "outputTester.h"
-#include "performancePeak.h"
+#include "performanceTest.h"
 
 
 int main(void) {
 	//testFilters();
 	//WarningTest();
-	PerformancePeak();
 
 	//PulseTest();
 	//Hello();
@@ -36,11 +35,16 @@ int main(void) {
 	//peakDetectionTest();
 	//calculateRRTest();
 
+	PerformancePeak();
+	PerformanceFilters();
+	PerformanceMain();
 
-	//FILE * ecgFile = openfile("ECG.txt");
+
+	  /*
+	FILE * ecgFile = openfile("ECG.txt");
 
 	//Setting the array size
-	/*
+
 	int arraysize=32;
 
 	//x is the input array, y is the output array
@@ -59,11 +63,17 @@ int main(void) {
 				}
 		counter=0;
 		while (counter<arraysize && x[element%arraysize]!=INT_MAX) {
+				LowPass[counter] = lowPassFilter(LowPass, x, counter);
+				HighPass[counter] = highPassFilter(HighPass, LowPass, counter);
+				Deriv[counter] = derivativeFilter(HighPass, counter);
+				Square[counter] = squaringFilter(Deriv, counter);
+				y[counter]=mwiFilter(Square,counter);
 				peakDetection(x, element);
 				element++;
 				counter++;
 		}
-	}*/
+	}
+	*/
 
 	return EXIT_SUCCESS;
 }

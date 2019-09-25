@@ -7,12 +7,11 @@
 
 int peak;
 
-int Index[100];
+int Index[10000];
 int position=0;
 int Rposition=0;
 
-int PEAKS[100];
-int Rpeak[100];
+int PEAKS[10000];
 
 int THRESHOLD1 = 0;
 int THRESHOLD2 =0;
@@ -20,7 +19,7 @@ int NPKF =0;
 int SPKF = 0;
 int warningIntervals=0;
 
-int RPEAKS[100];
+int RPEAKS[10000];
 int RR,RR_MISS;
 int RR_LOW =0;
 int RR_HIGH =INT_MAX;
@@ -32,13 +31,13 @@ int RR_AVG1,RR_AVG2;
 void peakDetection(int x[], int n)
 {
 	//All peaks that are found, are stored in a list named PEAKS
-	int search = searchPeak(x,n);
+	int search = searchPeak(x,n%32);
 	if(search != 0){
-		 peak = searchPeak(x,n);
+		 peak = searchPeak(x,n%32);
 
 		 storeArray(peak, PEAKS, position);
 		 
-		 int peakIndex=n%32;
+		 int peakIndex=n;
 		 storeArray(peakIndex,Index, position);
 		 position++;
 		 //The algorithm then checks if they exceed THRESHOLD1. If they do, they are classified as an R-peak.
@@ -55,31 +54,29 @@ void peakDetection(int x[], int n)
 			if((RR_LOW < RR)  && (RR < RR_HIGH)){
 			    warningIntervals =0;
 				//Store peak as Rpeak
-				 storeArray(peak, RPEAKS, Rposition);
+				storeArray(peak, RPEAKS, Rposition);
 
 				//SPKF
-				 SPKF = 0.125 * peak + 0.875 * SPKF ;
+				SPKF = 0.125 * peak + 0.875 * SPKF ;
 
 				//Store RR in RecentRR_OK
-
 				storeArray(RR,RecentRR_OK, (Rposition)%8 );
 
 				//Store RR in RecentRR
 				storeArray(RR,RecentRR,  (Rposition)%8 );
 
+				//RR_AVG1 = avg of RecentRR
+				RR_AVG1 = findAvg(RecentRR);
 
-				 //RR_AVG1 = avg of RecentRR
-				 RR_AVG1 = findAvg(RecentRR);
+				//RR_AVERAGE2 = avg of RecentRR_OK
+				RR_AVG2 = findAvg(RecentRR_OK);
 
-				 //RR_AVERAGE2 = avg of RecentRR_OK
-				 RR_AVG2 = findAvg(RecentRR_OK);
-
-				 RR_LOW  = 0.92  * RR_AVG2;
-				 RR_HIGH = 1.16  * RR_AVG2;
-				 RR_MISS  = 1.66  * RR_AVG2;
-				 THRESHOLD1 = NPKF  + 0.25*(SPKF- NPKF);
-				 THRESHOLD2 = 0.5* THRESHOLD1;
-				 Rposition++;
+				RR_LOW  = 0.92  * RR_AVG2;
+				RR_HIGH = 1.16  * RR_AVG2;
+				RR_MISS  = 1.66  * RR_AVG2;
+				THRESHOLD1 = NPKF  + 0.25*(SPKF- NPKF);
+				THRESHOLD2 = 0.5* THRESHOLD1;
+				Rposition++;
 			}
 			else{
 				//5.3 Searchback
