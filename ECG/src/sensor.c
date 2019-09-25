@@ -1,24 +1,26 @@
 #include "sensor.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+
 
 int getNextData(FILE *file)
 {
-	int line = 0;
+	int value;
 
-	if (!feof(file)){
-		fscanf(file,"%d",&line);
-		//printf("Data: %d", line);
+	if (feof(file)){
+		return INT_MAX;
 	}
 	else{
-		fclose(file);
+		fscanf(file,"%d",&value);
 	}
-	return line;
+
+	return value;
 }
 
 FILE* openfile(const char* filename)
 {
-   FILE *file = fopen(filename, "r"); // Replace NULL with the actual file object
+   FILE *file = fopen(filename, "r");
 
    return file;
 }

@@ -6,19 +6,15 @@
 #include <stdlib.h>
 #include <limits.h>
 
-extern int RPEAKS[100];
-extern int Rposition, position;
-extern int warningIntervals;
-
-void outputResults(){
+void outputResults(int arr[], int Rposition, int position, int warningIntervals){
 	if(warnings(warningIntervals,Rposition)){
 		printf("Warning!");
-		printf("Latest R-peak %d",RPEAKS[Rposition]);
+		printf("Latest R-peak %d",arr[Rposition]);
 		printf("Time-value %d", position );
 		printf("Pulse" );
 	}
 	else{
-		printf("Latest R-peak %d",RPEAKS[Rposition]);
+		printf("Latest R-peak %d",arr[Rposition]);
 		printf("Time-value %d", position );
 		printf("Pulse" );
 	}
