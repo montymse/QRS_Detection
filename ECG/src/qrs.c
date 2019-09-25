@@ -29,7 +29,7 @@ int RecentRR[8]={0,0,0,0,0,0,0,0};
 int RR_AVG1,RR_AVG2;
 
 
-void peakDetection(int x[], int n, int r)
+void peakDetection(int x[], int n)
 {
 	//All peaks that are found, are stored in a list named PEAKS
 	int search = searchPeak(x,n);
@@ -38,7 +38,7 @@ void peakDetection(int x[], int n, int r)
 
 		 storeArray(peak, PEAKS, position);
 		 
-		 int peakIndex=r*32+n;
+		 int peakIndex=n%32;
 		 storeArray(peakIndex,Index, position);
 		 position++;
 		 //The algorithm then checks if they exceed THRESHOLD1. If they do, they are classified as an R-peak.
@@ -48,7 +48,7 @@ void peakDetection(int x[], int n, int r)
 			 THRESHOLD2 = 0.5* THRESHOLD1;
 		 }
 		 else{
-		    RR = calculateRR(position-1, Index);
+		    RR = calculateRR(Rposition, Index);
 		    warningIntervals++;
 
 

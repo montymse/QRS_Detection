@@ -307,3 +307,12 @@ void testAllFiltersChainedTogether()
 	fclose(ecgFile);
 	fclose(mwiAfterTestFile);
 }
+
+void testFilters() {
+		testLowPassFilter();
+		testHighPassFilter();
+		testDerivativeFilter();
+		testSquaringFilter();
+		testMwiFilter();
+		testAllFiltersChainedTogether();
+}

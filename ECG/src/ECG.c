@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+
 #include "sensor.h"
 #include "filters.h"
 #include "filterTester.h"
@@ -18,34 +20,41 @@
 #include "output.h"
 
 int main(void) {
+	//testFilters();
+	//OutputTest();
+
+
 	//storeArrayTest();
 	//searchPeakTest();
-	//warningTest();
 	//findAvgTest();
 	//peakDetectionTest();
 	//calculateRRTest();
-	testLowPassFilter();
-	testHighPassFilter();
-	testDerivativeFilter();
-	testSquaringFilter();
-	testMwiFilter();
-	testAllFiltersChainedTogether();
-	/*
-	 *
-	 *
 
-int main(void) {
-	puts("!!!Hello Clair!!!");
- 	FILE * file = openfile("ECG.txt");
-	getNextData(file);
 
-	testLowPassFilter();
-	testHighPassFilter();
-	testDerivativeFilter();
-	testSquaringFilter();
-	testMwiFilter();
-	testAllFiltersChainedTogether();
-	*/
+	FILE * ecgFile = openfile("ECG.txt");
+	int arraysize=32;
+	int x[arraysize], y[arraysize]={INT_MAX};
+	int LowPass[arraysize], HighPass[arraysize],Deriv[arraysize],Square[arraysize]={INT_MAX};
+	int element=0;
+	int counter=0;
+
+
+	while (getNextData(ecgFile)!=INT_MAX) {
+		for(int i=0; i < arraysize; i++){
+				if (getNextData(ecgFile)!=INT_MAX) {
+					x[i]= getNextData(ecgFile);
+				}
+
+
+				}
+		counter=0;
+		while (counter<arraysize && x[element%arraysize]!=INT_MAX) {
+				peakDetection(x, element);
+				element++;
+				counter++;
+		}
+	}
+
 
 	return EXIT_SUCCESS;
 }

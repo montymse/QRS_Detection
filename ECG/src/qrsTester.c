@@ -30,8 +30,8 @@ void findAvgTest(){
 }
 
 
-extern int PEAKS[100];
-extern int Index[100];
+//extern int PEAKS[100];
+//extern int Index[100];
 extern int THRESHOLD1,THRESHOLD2,SPKF,NPKF, RR_LOW, RR_HIGH, RR, RR_MISS;
 
 void peakDetectionTest(){
@@ -41,7 +41,7 @@ void peakDetectionTest(){
 		x[i]= getNextData(file);
 	}
 	for(int i =0 ; i < 32;i++){
-		peakDetection(x, i,0);
+		peakDetection(x, i);
 
 		printf("THRESHOLD1 %d & THRESHOLD2 %d & SPKF %d & NPKF %d  & RRLOW %d &RRHIGH %d & RR %d & RRMISS %d\n", THRESHOLD1,THRESHOLD2,SPKF,NPKF, RR_LOW, RR_HIGH, RR, RR_MISS);
 	}
