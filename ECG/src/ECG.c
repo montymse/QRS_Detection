@@ -32,19 +32,22 @@ int main(void) {
 
 
 	FILE * ecgFile = openfile("ECG.txt");
+
+	//Setting the array size
 	int arraysize=32;
+
+	//x is the input array, y is the output array
 	int x[arraysize], y[arraysize]={INT_MAX};
 	int LowPass[arraysize], HighPass[arraysize],Deriv[arraysize],Square[arraysize]={INT_MAX};
 	int element=0;
 	int counter=0;
 
-
-	while (getNextData(ecgFile)!=INT_MAX) {
+	//Peakdetection algoritmen kører så længe der er input
+	while (!feof(ecgFile)) {
 		for(int i=0; i < arraysize; i++){
 				if (getNextData(ecgFile)!=INT_MAX) {
 					x[i]= getNextData(ecgFile);
 				}
-
 
 				}
 		counter=0;
