@@ -6,18 +6,23 @@
 #include <stdlib.h>
 #include <limits.h>
 
-void outputResults(int arr[], int Rposition, int position, int warningIntervals){
+void outputResults(int arr[], int Rposition, int numberofpeaks, int warningIntervals, int numberofsamples){
 	if(warnings(warningIntervals,Rposition)){
 		printf("Warning!");
 		printf("Latest R-peak %d",arr[Rposition]);
-		printf("Time-value %d", position );
+		printf("Time-value");
 		printf("Pulse" );
 	}
 	else{
 		printf("Latest R-peak %d",arr[Rposition]);
-		printf("Time-value %d", position );
-		printf("Pulse" );
+		printf("Time-value");
+		printf("Pulse %d", Pulse(numberofpeaks,numberofsamples));
 	}
+}
+
+
+int Pulse (int NumberofPeaks, int NumberofSamples) {
+	return NumberofPeaks/(NumberofSamples/250);
 }
 
 

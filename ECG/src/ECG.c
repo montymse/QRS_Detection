@@ -18,11 +18,17 @@
 #include "qrs.h"
 #include "qrsTester.h"
 #include "output.h"
+#include "outputTester.h"
+#include "performancePeak.h"
+
 
 int main(void) {
 	//testFilters();
-	//OutputTest();
+	//WarningTest();
+	PerformancePeak();
 
+	//PulseTest();
+	//Hello();
 
 	//storeArrayTest();
 	//searchPeakTest();
@@ -31,9 +37,10 @@ int main(void) {
 	//calculateRRTest();
 
 
-	FILE * ecgFile = openfile("ECG.txt");
+	//FILE * ecgFile = openfile("ECG.txt");
 
 	//Setting the array size
+	/*
 	int arraysize=32;
 
 	//x is the input array, y is the output array
@@ -56,8 +63,7 @@ int main(void) {
 				element++;
 				counter++;
 		}
-	}
-
+	}*/
 
 	return EXIT_SUCCESS;
 }
