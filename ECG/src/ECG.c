@@ -21,6 +21,8 @@
 #include "outputTester.h"
 #include "performanceTest.h"
 
+#define ARRAYSIZE 32
+
 
 int main(void) {
 	//testFilters();
@@ -40,40 +42,43 @@ int main(void) {
 	PerformanceMain();
 
 
-	  /*
 	FILE * ecgFile = openfile("ECG.txt");
 
-	//Setting the array size
-
-	int arraysize=32;
-
 	//x is the input array, y is the output array
-	int x[arraysize], y[arraysize]={INT_MAX};
-	int LowPass[arraysize], HighPass[arraysize],Deriv[arraysize],Square[arraysize]={INT_MAX};
+	int x[ARRAYSIZE]={ INT_MAX };
+	int y[ARRAYSIZE];
+
+	int LowPass[ARRAYSIZE];
+	int HighPass[ARRAYSIZE];
+	int Deriv[ARRAYSIZE];
+	int Square[ARRAYSIZE];
+
+	//Counters
 	int element=0;
 	int counter=0;
-
 	//Peakdetection algoritmen kører så længe der er input
 	while (!feof(ecgFile)) {
-		for(int i=0; i < arraysize; i++){
-				if (getNextData(ecgFile)!=INT_MAX) {
-					x[i]= getNextData(ecgFile);
-				}
-
-				}
+		for(int i=0; i < ARRAYSIZE; i++){
+						x[i]= getNextData(ecgFile);
+					}
 		counter=0;
-		while (counter<arraysize && x[element%arraysize]!=INT_MAX) {
-				LowPass[counter] = lowPassFilter(LowPass, x, counter);
-				HighPass[counter] = highPassFilter(HighPass, LowPass, counter);
-				Deriv[counter] = derivativeFilter(HighPass, counter);
-				Square[counter] = squaringFilter(Deriv, counter);
-				y[counter]=mwiFilter(Square,counter);
-				peakDetection(x, element);
-				element++;
-				counter++;
+
+		while (counter<ARRAYSIZE) {
+			if (x[counter]==INT_MAX) {
+				break;
+			}
+			LowPass[counter] = lowPassFilter(LowPass, x, counter);
+			HighPass[counter] = highPassFilter(HighPass, LowPass, counter);
+			Deriv[counter] = derivativeFilter(HighPass, counter);
+			Square[counter] = squaringFilter(Deriv, counter);
+			y[counter]=mwiFilter(Square,counter);
+
+			peakDetection(y, element);
+
+			element++;
+			counter++;
+			}
 		}
-	}
-	*/
 
 	return EXIT_SUCCESS;
 }

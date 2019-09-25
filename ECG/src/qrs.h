@@ -1,6 +1,7 @@
 #ifndef QSR_H
 #define QSR_H
 
+
 // Header file for QRS functionality
 // it is recommended to use the structure "QRS_parameters"
 // to organize all variables and parameters
