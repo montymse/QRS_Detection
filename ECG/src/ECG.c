@@ -41,7 +41,7 @@ int main(void) {
 	PerformanceFilters();
 	PerformanceMain();
 
-
+/*
 	FILE * ecgFile = openfile("ECG.txt");
 
 	//x is the input array, y is the output array
@@ -79,7 +79,7 @@ int main(void) {
 			counter++;
 			}
 		}
-
+*/
 	return EXIT_SUCCESS;
 }
 
