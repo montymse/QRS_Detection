@@ -251,6 +251,11 @@ void testMwiFilter()
 	fclose(mwiAfterTestFile);
 }
 
+
+
+
+
+
 void testAllFiltersChainedTogether()
 {
 	int xInput[LOW_PASS_INPUT_SIZE] = { 0 };
@@ -280,6 +285,7 @@ void testAllFiltersChainedTogether()
 		}
 
 		// run all filters in a chain, passing output from one as input for the next
+
 		yLowPass[inputCounter % LOW_PASS_OUTPUT_SIZE] = lowPassFilter(yLowPass, xInput, inputCounter);
 		yHighPass[inputCounter % HIGH_PASS_OUTPUT_SIZE] = highPassFilter(yHighPass, yLowPass, inputCounter);
 		yDeriv[inputCounter % DERIVATIVE_OUTPUT_SIZE] = derivativeFilter(yHighPass, inputCounter);

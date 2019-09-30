@@ -8,5 +8,4 @@ void testSquaringFilter();
 void testMwiFilter();
 void testAllFiltersChainedTogether();
 void testFilters();
-
 #endif // FILTERTESTER_H

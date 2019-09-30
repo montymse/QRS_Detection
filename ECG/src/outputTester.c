@@ -7,10 +7,10 @@
 
 void PulseTest() {
 
-	printf("Current pulse:  %d", Pulse(100,30));
-	printf("Current pulse:  %d", Pulse(250,40));
-	printf("Current pulse:  %d", Pulse(30,3));
-	printf("Current pulse:  %d", Pulse(500,70));
+	printf("Expected pulse:  %d \t Actual pulse:   %d\n",37, Pulse(80,550));
+	printf("Expected pulse:  %d \t Actual pulse:   %d\n",43, Pulse(60,350));
+	printf("Expected pulse:  %d \t Actual pulse:   %d\n",24, Pulse(80,850));
+	printf("Expected pulse:  %d \t Actual pulse:   %d\n",17, Pulse(30,450));
 
 }
 
@@ -19,8 +19,4 @@ void WarningTest(){
 	printf("warnings %d\n", warnings(4,1000));
 	printf("warnings %d\n", warnings(3,2500));
 	printf("warnings %d\n", warnings(6,1000));
-}
-
-void Hello() {
-	printf("Hello");
 }

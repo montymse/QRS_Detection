@@ -6,23 +6,25 @@
 #include <stdlib.h>
 #include <limits.h>
 
-void outputResults(int arr[], int Rposition, int numberofpeaks, int warningIntervals, int numberofsamples){
-	if(warnings(warningIntervals,Rposition)){
-		printf("Warning!");
-		printf("Latest R-peak %d",arr[Rposition]);
-		printf("Time-value");
-		printf("Pulse" );
-	}
-	else{
-		printf("Latest R-peak %d",arr[Rposition]);
-		printf("Time-value");
-		printf("Pulse %d", Pulse(numberofpeaks,numberofsamples));
-	}
-}
+extern int warningIntervals, Rposition, position;
+extern int RPEAKS[];
 
 
 int Pulse (int NumberofPeaks, int NumberofSamples) {
-	return NumberofPeaks/(NumberofSamples/250);
+	int val = (NumberofSamples/250);
+	int diff = 250-(NumberofSamples%250);
+
+	if (val==0) { //Round up to 1 if val is null
+		return NumberofPeaks/1;
+	}
+
+	if (diff<=125) { //Ceiling
+		return NumberofPeaks/(val+1);
+	}
+
+	else {
+		return NumberofPeaks/val;
+	}
 }
 
 
@@ -33,3 +35,19 @@ int warnings(int nInterval, int value){
 		return 0;
 	}
 }
+
+void outputResults(int numberofsamples, double Time){
+	if(warnings(warningIntervals,Rposition)){
+		printf("Warning! \t");
+		printf("Latest R-peak %d \t",RPEAKS[Rposition]);
+		printf("Time-value, %d \t", Time);
+		printf("Pulse %d \n\n\n", Pulse(position,numberofsamples));
+	}
+	else{
+		printf("Latest R-peak %d",RPEAKS[Rposition]);
+		printf("Time-value, %d", Time);
+		printf("Pulse %d", Pulse(position,numberofsamples));
+	}
+}
+
+

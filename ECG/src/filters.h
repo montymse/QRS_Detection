@@ -18,7 +18,6 @@ int derivativeFilter(int x[], int n);
 int squaringFilter( int x[], int n);
 int mwiFilter(int x[], int n);
 
-
 // Implement additional filters
 
 #endif // FILTERS_H

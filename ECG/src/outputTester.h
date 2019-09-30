@@ -4,6 +4,4 @@
 
 void WarningTest();
 void PulseTest();
-void TimeTest();
-void Hello();
 #endif

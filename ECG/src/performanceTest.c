@@ -24,7 +24,7 @@ int PerformancePeak() {
 
 		x[i%32]= getNextData(file);
 
-		peakDetection(x, i);
+		//peakDetection(x, i);
 
 		i++;
 	}
@@ -119,7 +119,7 @@ int PerformanceMain() {
 					Square[counter] = squaringFilter(Deriv, counter);
 					y[counter]=mwiFilter(Square,counter);
 
-					peakDetection(y, element);
+					//peakDetection(y, element);
 
 					element++;
 					counter++;

@@ -17,10 +17,10 @@ void storeArrayTest(){
 
 void searchPeakTest(){
 	int arr[]={1,2,3,4,6,5,9,1};
-	printf("Peak? %d \n", searchPeak(arr,3));
-	printf("Peak? %d \n", searchPeak(arr,6));
-	printf("Peak? %d \n", searchPeak(arr,7));
-	printf("Peak? %d \n", searchPeak(arr,4));
+	//printf("Peak? %d \n", searchPeak(arr,3));
+	//printf("Peak? %d \n", searchPeak(arr,6));
+	//printf("Peak? %d \n", searchPeak(arr,7));
+	//printf("Peak? %d \n", searchPeak(arr,4));
 
 }
 
@@ -41,7 +41,7 @@ void peakDetectionTest(){
 		x[i]= getNextData(file);
 	}
 	for(int i =0 ; i < 32;i++){
-		peakDetection(x, i);
+		//peakDetection(x, i);
 
 		printf("THRESHOLD1 %d & THRESHOLD2 %d & SPKF %d & NPKF %d  & RRLOW %d &RRHIGH %d & RR %d & RRMISS %d\n", THRESHOLD1,THRESHOLD2,SPKF,NPKF, RR_LOW, RR_HIGH, RR, RR_MISS);
 	}

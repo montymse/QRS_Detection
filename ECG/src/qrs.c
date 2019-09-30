@@ -13,27 +13,27 @@ int Rposition=0;
 
 int PEAKS[10000];
 
-int THRESHOLD1 = 0;
-int THRESHOLD2 =0;
+int THRESHOLD1 = 2000;
+int THRESHOLD2 =1000;
 int NPKF =0;
 int SPKF = 0;
 int warningIntervals=0;
 
 int RPEAKS[10000];
 int RR,RR_MISS;
-int RR_LOW =0;
+int RR_LOW =INT_MIN;
 int RR_HIGH =INT_MAX;
 int RecentRR_OK[8]={0,0,0,0,0,0,0,0};
 int RecentRR[8]={0,0,0,0,0,0,0,0};
 int RR_AVG1,RR_AVG2;
 
 
-void peakDetection(int x[], int n)
+void peakDetection(int x[], int n, int next)
 {
 	//All peaks that are found, are stored in a list named PEAKS
-	int search = searchPeak(x,n%32);
+	int search = searchPeak(x,n, next);
 	if(search != 0){
-		 peak = searchPeak(x,n%32);
+		 peak = searchPeak(x,n, next);
 
 		 storeArray(peak, PEAKS, position);
 		 
@@ -51,7 +51,7 @@ void peakDetection(int x[], int n)
 		    warningIntervals++;
 
 
-			if((RR_LOW < RR)  && (RR < RR_HIGH)){
+			if((RR_LOW < RR < RR_HIGH)){
 			    warningIntervals =0;
 				//Store peak as Rpeak
 				storeArray(peak, RPEAKS, Rposition);
@@ -86,17 +86,23 @@ void peakDetection(int x[], int n)
 			}
 		 }
 	}
+	//printf("%d: %d \t %d \t %d \t %d \n", n, Rposition, peak, x[n%32], THRESHOLD1);
 }
 
 
 //5.1 Searching for peaks
 
 
-int searchPeak(int x[], int n){
-	if ((x[n-1] < x[n]) &&  (x[n] > x[n+1])){
-			return x[n];
+int searchPeak(int x[], int n, int next){
+	if (n==0) {
+		return 0;
 	}
-	return 0;
+	else if ((x[(n-1)%32] < x[n%32]) && (next < x[n%32])){
+		return x[n%32];
+	}
+	else {
+		return 0;
+	}
 
 }
 
