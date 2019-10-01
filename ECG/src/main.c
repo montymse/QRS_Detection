@@ -41,18 +41,12 @@ int main(void) {
 	//PerformanceFilters();
 	//PerformanceMain();
 
-	clock_t start, end;
+	clock_t start;
 	double time=0.00000;
 
 	FILE * ecgFile = openfile("ECG.txt");
 	FILE * ecgFileNext = openfile("ECG.txt");
 	getNextData(ecgFileNext);
-
-	/*
-	FILE * done = openfile("x_mwi_div_after.txt");
-	FILE * doneNext = openfile("x_mwi_div_after.txt");
-	getNextData(doneNext);
-	*/
 
 	//x is the input array, y is the output array
 	int xInput[LOW_PASS_INPUT_SIZE] = { 0 };
@@ -72,26 +66,12 @@ int main(void) {
 	int inputCounter=0;
 	int next=0;
 
-	/*
-	FILE * THRSHOLD1;
-	FILE * THRSHOLD2;
-	FILE * FILTEREDDATA;
 
-	THRSHOLD1=fopen("THRESHOLD1.txt","w");
-	THRSHOLD2=fopen("THRESHOLD2.txt","w");
-	FILTEREDDATA=fopen("FILTEREDDATA.txt","w");
-
-	extern int THRESHOLD1, THRESHOLD2;
-	int THOLD1NOW=THRESHOLD1;
-	int THOLD2NOW=THRESHOLD2;
-	 */
-
+	extern int searchback;
 
 	//Peakdetection algoritmen kører så længe der er input
 			while (!feof(ecgFile)) {
-			//while (inputCounter<250) {
 					start = clock();
-
 
 					xInput[inputCounter% LOW_PASS_INPUT_SIZE]= getNextData(ecgFile);
 					yLowPass[inputCounter % LOW_PASS_OUTPUT_SIZE] = lowPassFilter(yLowPass, xInput, inputCounter);
@@ -99,7 +79,6 @@ int main(void) {
 					yDeriv[inputCounter % DERIVATIVE_OUTPUT_SIZE] = derivativeFilter(yHighPass, inputCounter);
 					ySquare[inputCounter % SQUARING_OUTPUT_SIZE] = squaringFilter(yDeriv, inputCounter);
 					y[inputCounter%32] = mwiFilter(ySquare, inputCounter);
-					//fprintf(FILTEREDDATA,"%d\n", mwiFilter(ySquare, inputCounter));
 
 
 					xNext[inputCounter% LOW_PASS_INPUT_SIZE]= getNextData(ecgFileNext);
@@ -112,20 +91,10 @@ int main(void) {
 					peakDetection(y, inputCounter, next);
 
 
-/*
-					if (THOLD1NOW!=THRESHOLD1) {
-						THOLD1NOW=THRESHOLD1;
-						fprintf(THRSHOLD1,"%d\n",THOLD1NOW);
-					}
-					if (THOLD2NOW!=THRESHOLD2) {
-						THOLD2NOW=THRESHOLD2;
-						fprintf(THRSHOLD2,"%d\n",THOLD2NOW);
-					}
+					inputCounter++;
 
-*/
 					time=(((double) (start)));
 					outputResults(inputCounter,time/CLOCKS_PER_SEC);
-					inputCounter++;
 				}
 			fclose(ecgFile);
 			fclose(ecgFileNext);
@@ -133,10 +102,4 @@ int main(void) {
 	return EXIT_SUCCESS;
 }
 
-
-/*
- *
- * next=getNextData(doneNext);
-	[inputCounter%32]=getNextData(done);
- */
 
