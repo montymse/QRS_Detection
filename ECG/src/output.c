@@ -7,7 +7,7 @@
 #include <limits.h>
 
 extern int warningIntervals, Rposition, position;
-extern int RPEAKS;
+extern int RPEAKS[];
 
 
 int Pulse (int NumberofPeaks, int NumberofSamples) {
@@ -36,12 +36,12 @@ void outputResults(int numberofsamples, double Time) {
 
 	if(warnings(warningIntervals,Rposition)){
 		printf("Warning! \t");
-		//printf("Latest R-peak %d \t",RPEAKS[Rposition%32]);
+		printf("Latest R-peak %d \t",RPEAKS[Rposition%32]);
 		printf("Time-value, %f \t", Time);
 		printf("Pulse %d \n\n\n", Pulse(position,numberofsamples));
 	}
 	else{
-		//printf("Latest R-peak %d \t",RPEAKS[Rposition%32]);
+		printf("Latest R-peak %d \t",RPEAKS[Rposition%32]);
 		printf("Time-value, %f \t", Time);
 		printf("Pulse %d \n\n\n", Pulse(position,numberofsamples));
 	}
