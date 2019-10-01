@@ -65,9 +65,9 @@ int main(void) {
 	//Counters
 	int inputCounter=0;
 	int next=0;
+	int new=0;
 
-
-	extern int searchback;
+	extern int Rposition,peak;
 
 	//Peakdetection algoritmen kører så længe der er input
 			while (!feof(ecgFile)) {
@@ -88,14 +88,17 @@ int main(void) {
 					ySquareNext[inputCounter % SQUARING_OUTPUT_SIZE] = squaringFilter(yDerivNext, inputCounter);
 					next = mwiFilter(ySquareNext, inputCounter);
 
+					new=Rposition;
 					peakDetection(y, inputCounter, next);
 
 
 					inputCounter++;
 
 					time=(((double) (start)));
-					outputResults(inputCounter,time/CLOCKS_PER_SEC);
+					if (new!=Rposition){
+					outputResults(inputCounter,time/CLOCKS_PER_SEC,peak);
 				}
+			}
 			fclose(ecgFile);
 			fclose(ecgFileNext);
 
