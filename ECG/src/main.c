@@ -24,15 +24,15 @@
 
 #define ARRAYSIZE 33
 
-void performance();
-void program();
+void Performance();
+void Program();
 void Test();
 
 
 	/*
 	 *  Perfomance analysis
 	 */
-void performance() {
+void Performance() {
 		PerformancePeak();
 		PerformanceFilters();
 		PerformanceMain();
@@ -42,7 +42,7 @@ void performance() {
 	*  Program for algorithm
 	*/
 
-void program() {
+void Program() {
 	clock_t start;
 		double time=0.00000;
 
@@ -117,26 +117,25 @@ void Test() {
 
 int main(void) {
 
+	/*
+	 *  Program for algorithm
+	 */
+
+		Program();
 
 	/*
 	 *  Perfomance analysis
 	 *  Call function: performance();
 	 */
 
-	//performance();
-
-	/*
-	 *  Program for algorithm
-	 */
-
-	//program();
+		Performance();
 
 
 	/*
 	 *  All tests
 	 */
 
-	Test();
+		Test();
 
 	return EXIT_SUCCESS;
 }

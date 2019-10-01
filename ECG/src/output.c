@@ -6,14 +6,10 @@
 #include <stdlib.h>
 #include <limits.h>
 
-extern int warningIntervals, Rposition, position;
+extern int warningIntervals, position;
 
 
 int Pulse (int NumberofPeaks, int NumberofSamples) {
-
-
-
-
 
 		return ((NumberofPeaks*15000)/NumberofSamples);
 

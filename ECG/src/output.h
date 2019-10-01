@@ -3,5 +3,5 @@
 
 int warnings(int nInterval, int value);
 int Pulse(int NumberofPeaks, int NumberofSamples);
-void outputResults(int numberofsamples, double Time, Rpeak);
+void outputResults(int numberofsamples, double Time, int Rpeak);
 #endif
