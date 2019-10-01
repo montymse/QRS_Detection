@@ -36,6 +36,9 @@ int PerformancePeak() {
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 	printf("Cpu time used for peakdetection %f\n", cpu_time_used);
 
+	fclose(file);
+	fclose(fileNext);
+
 
 	return (int) cpu_time_used;
 }
@@ -76,6 +79,7 @@ int PerformanceFilters() {
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 	printf("Cpu time used for the filters %f\n", cpu_time_used);
 
+	fclose(ecgFile);
 
 
 	return (int) cpu_time_used;
@@ -140,5 +144,7 @@ int PerformanceMain() {
 				cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 				printf("Cpu time used for the main program: %f\n", cpu_time_used);
 
+				fclose(ecgFile);
+				fclose(ecgFileNext);
 	return (int) cpu_time_used;
 }
