@@ -10,15 +10,13 @@ extern int warningIntervals, Rposition, position;
 
 
 int Pulse (int NumberofPeaks, int NumberofSamples) {
-	int val = (NumberofSamples/250);
 
-	if (val==0) { //Round up to 1 if val is null
-		return (15*NumberofPeaks/1);
-	}
 
-	else {
-		return (15*NumberofPeaks/val);
-	}
+
+
+
+		return ((NumberofPeaks*15000)/NumberofSamples);
+
 }
 
 

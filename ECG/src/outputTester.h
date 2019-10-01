@@ -4,4 +4,5 @@
 
 void WarningTest();
 void PulseTest();
+void TestOutput();
 #endif

@@ -314,11 +314,12 @@ void testAllFiltersChainedTogether()
 	fclose(mwiAfterTestFile);
 }
 
-void testFilters() {
+void TestFilters() {
 		testLowPassFilter();
 		testHighPassFilter();
 		testDerivativeFilter();
 		testSquaringFilter();
 		testMwiFilter();
 		testAllFiltersChainedTogether();
+		printf("\n \n");
 }

@@ -7,5 +7,5 @@ void testDerivativeFilter();
 void testSquaringFilter();
 void testMwiFilter();
 void testAllFiltersChainedTogether();
-void testFilters();
+void TestFilters();
 #endif // FILTERTESTER_H
