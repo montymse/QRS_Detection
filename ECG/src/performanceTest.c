@@ -14,6 +14,8 @@ int PerformancePeak() {
 	clock_t start, end;
 	double cpu_time_used;
 	FILE *file = openfile("x_mwi_div_after.txt");
+	FILE *fileNext = openfile("x_mwi_div_after.txt");
+	getNextData(fileNext);
 	int x[32] ;
 
 	start = clock();
@@ -24,7 +26,7 @@ int PerformancePeak() {
 
 		x[i%32]= getNextData(file);
 
-		//peakDetection(x, i);
+		peakDetection(x,i,getNextData(fileNext));
 
 		i++;
 	}
@@ -48,30 +50,27 @@ int PerformanceFilters() {
 
 		//x is the input array, y is the output array
 
-		int x[ARRAYSIZE]={ INT_MAX };
+		int xInput[LOW_PASS_INPUT_SIZE] = { 0 };
 		int y[ARRAYSIZE];
 
-		int LowPass[ARRAYSIZE];
-		int HighPass[ARRAYSIZE];
-		int Deriv[ARRAYSIZE];
-		int Square[ARRAYSIZE];
+		int yLowPass[LOW_PASS_OUTPUT_SIZE] = { 0 };
+		int yHighPass[HIGH_PASS_OUTPUT_SIZE] = { 0 };
+		int yDeriv[DERIVATIVE_OUTPUT_SIZE] = { 0 };
+		int ySquare[SQUARING_OUTPUT_SIZE] = { 0 };
 
 		//Counter
-		int counter=0;
+		int inputCounter=0;
 		//Peakdetection algoritmen kører så længe der er input
 		while (!feof(ecgFile)) {
-			counter=0;
-			while (counter<ARRAYSIZE) {
-					x[counter]= getNextData(ecgFile);
-					LowPass[counter] = lowPassFilter(LowPass, x, counter);
-					HighPass[counter] = highPassFilter(HighPass, LowPass, counter);
-					Deriv[counter] = derivativeFilter(HighPass, counter);
-					Square[counter] = squaringFilter(Deriv, counter);
-					y[counter]=mwiFilter(Square,counter);
-
-					counter++;
+			xInput[inputCounter% LOW_PASS_INPUT_SIZE]= getNextData(ecgFile);
+			yLowPass[inputCounter % LOW_PASS_OUTPUT_SIZE] = lowPassFilter(yLowPass, xInput, inputCounter);
+			yHighPass[inputCounter % HIGH_PASS_OUTPUT_SIZE] = highPassFilter(yHighPass, yLowPass, inputCounter);
+			yDeriv[inputCounter % DERIVATIVE_OUTPUT_SIZE] = derivativeFilter(yHighPass, inputCounter);
+			ySquare[inputCounter % SQUARING_OUTPUT_SIZE] = squaringFilter(yDeriv, inputCounter);
+			y[inputCounter%32] = mwiFilter(ySquare, inputCounter);
+			inputCounter++;
 			}
-		}
+
 
 	end = clock();
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
@@ -90,46 +89,56 @@ int PerformanceMain() {
 
 	start = clock();
 	FILE * ecgFile = openfile("ECG.txt");
+		FILE * ecgFileNext = openfile("ECG.txt");
+		getNextData(ecgFileNext);
 
+		//x is the input array, y is the output array
+		int xInput[LOW_PASS_INPUT_SIZE] = { 0 };
+		int xNext[LOW_PASS_INPUT_SIZE] = { 0 };
+		int y[ARRAYSIZE] = { 0 };
 
-			//x is the input array, y is the output array
+		int yLowPass[LOW_PASS_OUTPUT_SIZE] = { 0 };
+		int yHighPass[HIGH_PASS_OUTPUT_SIZE] = { 0 };
+		int yDeriv[DERIVATIVE_OUTPUT_SIZE] = { 0 };
+		int ySquare[SQUARING_OUTPUT_SIZE] = { 0 };
 
-			int x[ARRAYSIZE]={ INT_MAX };
-			int y[ARRAYSIZE];
+		int yLowPassNext[LOW_PASS_OUTPUT_SIZE] = { 0 };
+		int yHighPassNext[HIGH_PASS_OUTPUT_SIZE] = { 0 };
+		int yDerivNext[DERIVATIVE_OUTPUT_SIZE] = { 0 };
+		int ySquareNext[SQUARING_OUTPUT_SIZE] = { 0 };
+		//Counters
+		int inputCounter=0;
+		int next=0;
 
-			int LowPass[ARRAYSIZE];
-			int HighPass[ARRAYSIZE];
-			int Deriv[ARRAYSIZE];
-			int Square[ARRAYSIZE];
-
-			//Counters
-			int element=0;
-			int counter=0;
 		//Peakdetection algoritmen kører så længe der er input
-		while (!feof(ecgFile)) {
-			for(int i=0; i < ARRAYSIZE; i++){
-						x[i]= getNextData(ecgFile);
+				while (!feof(ecgFile)) {
+
+						xInput[inputCounter% LOW_PASS_INPUT_SIZE]= getNextData(ecgFile);
+						yLowPass[inputCounter % LOW_PASS_OUTPUT_SIZE] = lowPassFilter(yLowPass, xInput, inputCounter);
+						yHighPass[inputCounter % HIGH_PASS_OUTPUT_SIZE] = highPassFilter(yHighPass, yLowPass, inputCounter);
+						yDeriv[inputCounter % DERIVATIVE_OUTPUT_SIZE] = derivativeFilter(yHighPass, inputCounter);
+						ySquare[inputCounter % SQUARING_OUTPUT_SIZE] = squaringFilter(yDeriv, inputCounter);
+						y[inputCounter%32] = mwiFilter(ySquare, inputCounter);
+						//fprintf(FILTEREDDATA,"%d\n", mwiFilter(ySquare, inputCounter));
+
+
+						xNext[inputCounter% LOW_PASS_INPUT_SIZE]= getNextData(ecgFileNext);
+						yLowPassNext[inputCounter % LOW_PASS_OUTPUT_SIZE] = lowPassFilter(yLowPassNext, xNext, inputCounter);
+						yHighPassNext[inputCounter % HIGH_PASS_OUTPUT_SIZE] = highPassFilter(yHighPassNext, yLowPassNext, inputCounter);
+						yDerivNext[inputCounter % DERIVATIVE_OUTPUT_SIZE] = derivativeFilter(yHighPassNext, inputCounter);
+						ySquareNext[inputCounter % SQUARING_OUTPUT_SIZE] = squaringFilter(yDerivNext, inputCounter);
+						next = mwiFilter(ySquareNext, inputCounter);
+
+						peakDetection(y, inputCounter, next);
+
+						inputCounter++;
 					}
-			counter=0;
-			while (counter<ARRAYSIZE) {
+				fclose(ecgFile);
+				fclose(ecgFileNext);
 
-					LowPass[counter] = lowPassFilter(LowPass, x, counter);
-					HighPass[counter] = highPassFilter(HighPass, LowPass, counter);
-					Deriv[counter] = derivativeFilter(HighPass, counter);
-					Square[counter] = squaringFilter(Deriv, counter);
-					y[counter]=mwiFilter(Square,counter);
-
-					//peakDetection(y, element);
-
-					element++;
-					counter++;
-			}
-		}
-	end = clock();
-	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-	printf("Cpu time used for the main program: %f\n", cpu_time_used);
-
-
+				end = clock();
+				cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+				printf("Cpu time used for the main program: %f\n", cpu_time_used);
 
 	return (int) cpu_time_used;
 }

@@ -5,13 +5,16 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#define ARRAYSIZE 33
+
+
 int peak;
 
-int Index[10000];
+int Index[ARRAYSIZE];
 int position=0;
 int Rposition=0;
 
-int PEAKS[10000];
+int PEAKS[ARRAYSIZE];
 
 int THRESHOLD1 = 2000;
 int THRESHOLD2 =1000;
@@ -19,26 +22,25 @@ int NPKF =0;
 int SPKF = 0;
 int warningIntervals=0;
 
-int RPEAKS[10000];
+int RPEAKS[ARRAYSIZE];
 int RR,RR_MISS;
 int RR_LOW =INT_MIN;
 int RR_HIGH =INT_MAX;
 int RecentRR_OK[8]={0,0,0,0,0,0,0,0};
 int RecentRR[8]={0,0,0,0,0,0,0,0};
 int RR_AVG1,RR_AVG2;
-
-
 void peakDetection(int x[], int n, int next)
 {
+
 	//All peaks that are found, are stored in a list named PEAKS
 	int search = searchPeak(x,n, next);
 	if(search != 0){
 		 peak = searchPeak(x,n, next);
 
-		 storeArray(peak, PEAKS, position);
+		 storeArray(peak, PEAKS, (position)%32);
 		 
 		 int peakIndex=n;
-		 storeArray(peakIndex,Index, position);
+		 storeArray(peakIndex,Index, (position)%32);
 		 position++;
 		 //The algorithm then checks if they exceed THRESHOLD1. If they do, they are classified as an R-peak.
 		 if (peak < THRESHOLD1){
@@ -54,8 +56,7 @@ void peakDetection(int x[], int n, int next)
 			if((RR_LOW < RR < RR_HIGH)){
 			    warningIntervals =0;
 				//Store peak as Rpeak
-				storeArray(peak, RPEAKS, Rposition);
-
+				storeArray(peak, RPEAKS, (Rposition)%32);
 				//SPKF
 				SPKF = 0.125 * peak + 0.875 * SPKF ;
 
@@ -86,8 +87,9 @@ void peakDetection(int x[], int n, int next)
 			}
 		 }
 	}
-	//printf("%d: %d \t %d \t %d \t %d \n", n, Rposition, peak, x[n%32], THRESHOLD1);
+		//printf("%d: %d \t %d \t %d \t %d \t %d \n", n, Rposition, RPEAKS[(Rposition-1)%32], PEAKS[(position-1)%32], x[n%32], THRESHOLD1);
 }
+
 
 
 //5.1 Searching for peaks
@@ -115,7 +117,7 @@ int calculateRR(int n,int x[]){
 	if (n==0) {
 		return x[0];
 	}
-	return x[n]-x[n-1];
+	return x[n%32]-x[(n-1)%32];
 }
 
 
@@ -155,9 +157,7 @@ void searchBackwards(int n){
 		if(peak2 > THRESHOLD2){
 			
 			//Store as peak in RPEAKS
-			storeArray(peak, RPEAKS, Rposition);
-
-			
+			storeArray(peak, RPEAKS, Rposition%32);
 			//Store RR in RecentRR
 			storeArray(RR,RecentRR,Rposition%8);
 		 	SPKF = 0.25 * peak + 0.75 * SPKF;

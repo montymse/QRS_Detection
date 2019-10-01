@@ -42,10 +42,7 @@ int main(void) {
 	//PerformanceMain();
 
 	clock_t start, end;
-	double time;
-
-	start = clock();
-
+	double time=0.00000;
 
 	FILE * ecgFile = openfile("ECG.txt");
 	FILE * ecgFileNext = openfile("ECG.txt");
@@ -89,8 +86,12 @@ int main(void) {
 	int THOLD2NOW=THRESHOLD2;
 	 */
 
+
 	//Peakdetection algoritmen kører så længe der er input
 			while (!feof(ecgFile)) {
+			//while (inputCounter<250) {
+					start = clock();
+
 
 					xInput[inputCounter% LOW_PASS_INPUT_SIZE]= getNextData(ecgFile);
 					yLowPass[inputCounter % LOW_PASS_OUTPUT_SIZE] = lowPassFilter(yLowPass, xInput, inputCounter);
@@ -120,11 +121,10 @@ int main(void) {
 						THOLD2NOW=THRESHOLD2;
 						fprintf(THRSHOLD2,"%d\n",THOLD2NOW);
 					}
-*/
-					end = clock();
-					time = ((double) (end - start)) / CLOCKS_PER_SEC;
-					//outputResults(inputCounter,time);
 
+*/
+					time=(((double) (start)));
+					outputResults(inputCounter,time/CLOCKS_PER_SEC);
 					inputCounter++;
 				}
 			fclose(ecgFile);

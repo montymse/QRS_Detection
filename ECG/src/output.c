@@ -36,18 +36,21 @@ int warnings(int nInterval, int value){
 	}
 }
 
-void outputResults(int numberofsamples, double Time){
+void outputResults(int numberofsamples, double Time) {
+
+
 	if(warnings(warningIntervals,Rposition)){
 		printf("Warning! \t");
-		printf("Latest R-peak %d \t",RPEAKS[Rposition]);
-		printf("Time-value, %d \t", Time);
+		printf("Latest R-peak %d \t",RPEAKS[Rposition%32]);
+		printf("Time-value, %f \t", Time);
 		printf("Pulse %d \n\n\n", Pulse(position,numberofsamples));
 	}
 	else{
-		printf("Latest R-peak %d",RPEAKS[Rposition]);
-		printf("Time-value, %d", Time);
-		printf("Pulse %d", Pulse(position,numberofsamples));
+		printf("Latest R-peak %d \t",RPEAKS[Rposition%32]);
+		printf("Time-value, %f \t", Time);
+		printf("Pulse %d \n\n\n", Pulse(position,numberofsamples));
 	}
+
 }
 
 

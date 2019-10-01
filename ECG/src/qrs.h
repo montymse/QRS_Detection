@@ -2,15 +2,18 @@
 #define QSR_H
 
 
+
+
 // Header file for QRS functionality
 // it is recommended to use the structure "QRS_parameters"
 // to organize all variables and parameters
 
 typedef struct QRS_params
 { // Structure for QRS parameters
-   int SPKF, NPKF,THRESHOLD1,THRESHOLD2;
-   int RR, RR_LOW,RR_HIGH, RR_MISS, RR_AVERAGE1, RR_AVERAGE2;
-
+   int SPKF, NPKF,THRESHOLD1,THRESHOLD2, peak;
+   int RR, RR_LOW,RR_HIGH, RR_MISS, RR_AVG1, RR_AVG2;
+   int warningIntervals, position, Rposition;
+   int PEAKS, RPEAKS, RecentRR_OK,RecentRR, Index;
    // Add parameters that are missing
    // or of use to you
 
